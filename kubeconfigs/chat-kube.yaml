@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-demo
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      chat: web
+  template:
+    metadata:
+      labels:
+        chat: web
+    spec:
+      containers:
+      - name: chat-site
+        image: saurabh7verma/chat-demo:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-entrypoint
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    chat: web
+  ports:
+  - port: 3000
+    targetPort: 3000
+    nodePort: 30001
