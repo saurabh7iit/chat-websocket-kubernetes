@@ -1,4 +1,4 @@
-# chat-websocket-kubernetes\
+# chat-websocket-kubernetes
 Build Docker image\
 docker build -t saurabh7verma/chat-demo .\
 docker push saurabh7verma/chat-demo:latest\
