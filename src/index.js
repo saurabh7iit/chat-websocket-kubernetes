@@ -25,10 +25,13 @@ io.on('connection', (socket) => {
     totalClients++;
     socket.emit('message', `Welcome client# ${totalClients}`);
     let count = 1;
-    setInterval(() => socket.emit("message", `Message #${count++}`), 5000);
+    setInterval(() => socket.emit("message", `Message #${count++}`), 10000);
     socket.on('disconnect', function () {
         console.log('user disconnected');
     });
+    socket.on('sendMessage', (message) => {
+        io.emit('message', message);//to send message to all connected sockets.
+    })
 });
 
 server.listen(port, () => {
